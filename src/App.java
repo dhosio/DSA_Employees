@@ -1,7 +1,12 @@
+import tests.IEmpViewTest;
+
 public class App {
 
     public static void main(String[] args) {
-        new Employee();
+
+        IEmpViewTest iEmpViewTest = new IEmpViewTest();
+        iEmpViewTest.display();
+
     }
 
 }
