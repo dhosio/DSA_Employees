@@ -1,5 +1,6 @@
+package models;
+
 import interfaces.IEmpView;
-import tests.IEmpViewTest;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -7,7 +8,10 @@ import java.util.Date;
 
 public class Employee implements IEmpView {
 
-    // Employee Class Variables
+    // models.Employee class variables
+    static int numberOfEmployees = 1;
+
+    // models.Employee Instance Variables
     int employeeID;
     String firstName;
     String lastName;
@@ -16,6 +20,17 @@ public class Employee implements IEmpView {
     String email;
     Date dateJoined;
     String highestQualification;
+
+    public Employee(String firstName, String lastName, String address, int telephoneNumber, String email, Date dateJoined, String highestQualification) {
+        this.employeeID = numberOfEmployees++;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.telephoneNumber = telephoneNumber;
+        this.email = email;
+        this.dateJoined = dateJoined;
+        this.highestQualification = highestQualification;
+    }
 
     // Getter and Setter Methods
     public int getEmployeeID() {
