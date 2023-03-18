@@ -1,10 +1,11 @@
 package interfaces;
 
+import models.Node;
+
+import java.util.List;
+
 //  The interface that will hold the methods to be inherited by the circular linked list class
 public interface ADTListInterface<T> {
-
-    // To create the circular double linked list
-    void createList();
 
     // To get the number of all employees in the list
     int getLength();
@@ -13,24 +14,24 @@ public interface ADTListInterface<T> {
     boolean isEmpty();
 
     // Find a specific node in the list
-    boolean findNode(T nodeToFind);
+    boolean findNode(Node<T> nodeToFind);
 
     // Print the content of the list
     String printList();
 
     // To add a new employee at the beginning
-    void insertStart(T newNode);
+    void insert(Node<T> newNode);
 
-    // To insert at a specific position in the list
-    void insertAtPosition(int position, T newNode);
+    // To remove an employee from the list
+    void remove(Node<T> toRemove);
 
-    // To insert at the end
-    void insertEnd(T newNode);
+    // To find an employee by their Phone Number
+    void findByPhoneNumber(int phoneNumber);
 
-    // To remove a new employee at the beginning
-    void deleteStart(T toDelete);
+    // To find an employee by their last name
+    void findByLastName(String lastName);
 
-    // To remove at the end
-    void deleteEnd(T toDelete);
+    // To find all employees with a specific qualification
+    List<T> findAllByQualification(String qualification);
 
 }

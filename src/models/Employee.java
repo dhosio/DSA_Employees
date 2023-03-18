@@ -5,11 +5,13 @@ import interfaces.IEmpView;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.Objects;
 
 public class Employee implements IEmpView {
 
     // models.Employee class variables
     static int numberOfEmployees = 1;
+    final char EOLN = '\n';
 
     // models.Employee Instance Variables
     int employeeID;
@@ -108,14 +110,43 @@ public class Employee implements IEmpView {
         int fCounter = 1, mCounter = 1;
 
         System.out.format("\nYou are currently using the %s class. \nIt has the following variables: \n", className);
-        for (Field field : variables){
+        for (Field field : variables) {
             System.out.println(fCounter + ". " + field.getName());
-            fCounter ++;
+            fCounter++;
         }
         System.out.println("\nAnd the following methods: ");
-        for (Method method : methods){
+        for (Method method : methods) {
             System.out.println(mCounter + ". " + method.getName() + "()");
-            mCounter ++;
+            mCounter++;
         }
+    }
+
+    // To print out the Employee Instance details
+    @Override
+    public String toString() {
+
+        return "-----------------------------" + EOLN +
+                "Employee ID: " + this.employeeID + EOLN +
+                "First Name: " + this.firstName + EOLN +
+                "Last Name: " + this.lastName + EOLN +
+                "Address: " + this.address + EOLN +
+                "Phone Number: " + this.telephoneNumber + EOLN +
+                "Email: " + this.email + EOLN +
+                "Date joined: " + dateJoined + EOLN +
+                "Highest Qualification: " + this.highestQualification + EOLN;
+
+    }
+
+    // To compare different Employee instances - Based on ID only
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee employee)) return false;
+        return employeeID == employee.employeeID;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(employeeID);
     }
 }

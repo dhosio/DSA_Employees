@@ -41,6 +41,9 @@ public class EmployeeTest {
         // Get the employee class details
         emp.display();
 
+        System.out.println("Printing employee");
+        System.out.println(emp);
+
     }
 
     public static void getDetails(Employee emp) {
