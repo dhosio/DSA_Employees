@@ -19,11 +19,9 @@ public class EmployeeTest {
 
         // Create a new employee
         Employee emp = new Employee(firstName, lastName, address, telephoneNumber, email, dateJoined, highestQualification);
-        Employee emp1 = new Employee(firstName, lastName, address, telephoneNumber, email, dateJoined, highestQualification);
 
         // Get employee details
         getDetails(emp);
-        getDetails(emp1);
 
         // New details
         String newFirstName = "John";
@@ -39,6 +37,9 @@ public class EmployeeTest {
 
         // Get employee details after update
         getDetails(emp);
+
+        // Get the employee class details
+        emp.display();
 
     }
 
@@ -62,6 +63,7 @@ public class EmployeeTest {
     private static void setDetails(Employee emp, String newFirstName, String newLastName, String newAddress, int newTelephoneNumber,
                                    String newEmail, Date newDateJoined, String newHighestQualification) {
         // To set new values to the employee fields
+        emp.setEmployeeID(20);
         emp.setFirstName(newFirstName);
         emp.setLastName(newLastName);
         emp.setAddress(newAddress);

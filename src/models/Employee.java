@@ -105,13 +105,17 @@ public class Employee implements IEmpView {
         Field[] variables = this.getClass().getDeclaredFields();
         Method[] methods = this.getClass().getDeclaredMethods();
 
-        System.out.format("You are currently using the %s class. It has the following variables: \n", className);
+        int fCounter = 1, mCounter = 1;
+
+        System.out.format("\nYou are currently using the %s class. \nIt has the following variables: \n", className);
         for (Field field : variables){
-            System.out.println(field.getName());
+            System.out.println(fCounter + ". " + field.getName());
+            fCounter ++;
         }
-        System.out.println("And the following methods: ");
+        System.out.println("\nAnd the following methods: ");
         for (Method method : methods){
-            System.out.println(method.getName() + "()");
+            System.out.println(mCounter + ". " + method.getName() + "()");
+            mCounter ++;
         }
     }
 }
