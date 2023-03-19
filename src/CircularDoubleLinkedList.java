@@ -25,7 +25,7 @@ public class CircularDoubleLinkedList<T> implements ADTListInterface<T> {
 
     @Override
     public boolean isEmpty() {
-        return length == 0 ? true : false;
+        return head == null || length == 0;
     }
 
     @Override
@@ -33,38 +33,83 @@ public class CircularDoubleLinkedList<T> implements ADTListInterface<T> {
         // Counter to keep track of the list elements
         int counter = 0;
 
-        // Create a temp node
-        Node<T> temp = head;
+        if (isEmpty()) {
 
-        while (temp.nextNode != null){
+            // Create a temp node
+            Node<T> current = head;
 
-            // Check if the data matches
-            if (nodeToFind.nodeValue.equals(temp.nodeValue)){
-                return true;
+            while (current.nextNode != null) {
+
+                // Check if the data matches
+                if (nodeToFind.nodeValue.equals(current.nodeValue)) {
+                    return true;
+                }
+
+                // If not matched, move to the next node
+                current = current.nextNode;
+                counter++;
+
+                if (counter == getLength()) return false;
+
             }
-
-            // If not matched, move to the next node
-            temp = temp.nextNode;
-            counter++;
-            if (counter == getLength()) return false;
-
         }
         return false;
     }
 
     @Override
-    public String printList() {
-        return null;
+    public void printList() {
+        Node current = head;
+
+        if (isEmpty()) System.out.println("\n\n--- The list is empty ---\n\n");
+
+        // Traverse the list
+        while (current != null){
+            System.out.println(current);
+            current = current.nextNode;
+        }
+
+        // End of the list
+        System.out.println("\n\n--- End of the list ---\n\n");
     }
 
     @Override
-    public void insert(Node<T> newNode) {
+    public void insert(T newNodeVal) {
+        // Create the new node
+        Node<T> createdNode = new Node<T>(newNodeVal);
 
+        // Check if the list is empty
+        if (isEmpty()){
+            // Then new node is the head node
+            head = createdNode;
+            // Because it is also the last node
+            tail = head;
+            length++;
+            return;
+        }
+        // If there are other elements
+        createdNode.nextNode = head;
+        head = createdNode;
+        length++;
     }
 
     @Override
-    public void remove(Node<T> toRemove) {
+    public Node<T> remove(Node<T> toRemove) {
+        // To remove the fist element in the list
+        if (isEmpty()) System.out.println("Cannot remove from an empty list");
 
+        Node<T> currentNode = head;
+        head = head.nextNode;
+        currentNode.nextNode = null;
+        length--;
+
+        // Check if list is empty
+        if (isEmpty()) {
+            head = null;
+            tail  = null;
+            length = 0; // Reset length to 0
+        }
+
+        return currentNode;
     }
 
     @Override
@@ -74,6 +119,12 @@ public class CircularDoubleLinkedList<T> implements ADTListInterface<T> {
 
     @Override
     public void findByLastName(String lastName) {
+        // Traverse the list
+        if (isEmpty()) System.out.println("There are no node in the list");
+
+
+
+
 
     }
 

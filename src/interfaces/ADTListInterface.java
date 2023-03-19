@@ -17,13 +17,13 @@ public interface ADTListInterface<T> {
     boolean findNode(Node<T> nodeToFind);
 
     // Print the content of the list
-    String printList();
+    void printList();
 
     // To add a new employee at the beginning
-    void insert(Node<T> newNode);
+    void insert(T newNodeVal);
 
     // To remove an employee from the list
-    void remove(Node<T> toRemove);
+    Node<T> remove(Node<T> toRemove);
 
     // To find an employee by their Phone Number
     void findByPhoneNumber(int phoneNumber);
