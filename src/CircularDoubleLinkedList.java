@@ -1,15 +1,16 @@
 import interfaces.ADTListInterface;
+import models.Employee;
 import models.Node;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class CircularDoubleLinkedList<T> implements ADTListInterface<T> {
+public class CircularDoubleLinkedList<T> implements ADTListInterface<Employee> {
 
     // Class List variables
-    static int length;
-    Node<T> head;
-    Node<T> tail;
-
+    public static int length;
+    public Node<Employee> head;
+    public Node<Employee> tail;
 
     // Class constructor
     public CircularDoubleLinkedList() {
@@ -29,14 +30,14 @@ public class CircularDoubleLinkedList<T> implements ADTListInterface<T> {
     }
 
     @Override
-    public boolean findNode(Node<T> nodeToFind) {
+    public boolean findNode(Node<Employee> nodeToFind) {
         // Counter to keep track of the list elements
         int counter = 0;
 
         if (isEmpty()) {
 
             // Create a temp node
-            Node<T> current = head;
+            Node<Employee> current = head;
 
             while (current.nextNode != null) {
 
@@ -58,13 +59,13 @@ public class CircularDoubleLinkedList<T> implements ADTListInterface<T> {
 
     @Override
     public void printList() {
-        Node current = head;
+        Node<Employee> current = head;
 
         if (isEmpty()) System.out.println("\n\n--- The list is empty ---\n\n");
 
         // Traverse the list
         while (current != null){
-            System.out.println(current);
+            System.out.println(current.nodeValue);
             current = current.nextNode;
         }
 
@@ -73,9 +74,9 @@ public class CircularDoubleLinkedList<T> implements ADTListInterface<T> {
     }
 
     @Override
-    public void insert(T newNodeVal) {
+    public void insert(Employee newNodeVal) {
         // Create the new node
-        Node<T> createdNode = new Node<T>(newNodeVal);
+        Node<Employee> createdNode = new Node<>(newNodeVal);
 
         // Check if the list is empty
         if (isEmpty()){
@@ -93,14 +94,46 @@ public class CircularDoubleLinkedList<T> implements ADTListInterface<T> {
     }
 
     @Override
-    public Node<T> remove(Node<T> toRemove) {
+    public Employee remove(Employee toRemove) {
         // To remove the fist element in the list
         if (isEmpty()) System.out.println("Cannot remove from an empty list");
 
-        Node<T> currentNode = head;
-        head = head.nextNode;
-        currentNode.nextNode = null;
-        length--;
+        Node<Employee> current = head;
+
+        while (current != null){
+            // Check if the employee values match
+            if (current.nodeValue == toRemove){
+
+                // Check the position of the node
+                if ( current == head ){
+                    // If node is at start
+                    Node<Employee> temp = head;
+                    head = head.nextNode;
+                    temp.nextNode = null;
+                }
+
+                if ( current == tail ){
+                    // If node is at the end
+                    Node<Employee> temp = tail;
+                    tail = temp.prevNode;
+                    temp.prevNode = null;
+                }else{
+                    // Not at the start or at the end
+                    Node<Employee> temp = current;
+                    Node<Employee> tempNext = temp.nextNode;
+                    Node<Employee> tempPrev = temp.prevNode;
+
+                    tempPrev.nextNode = tempNext;
+                    tempNext.prevNode = tempPrev;
+                    temp.prevNode = temp.nextNode = null;
+                }
+
+                // Reduce the length
+                length--;
+
+            }
+            current = current.nextNode;
+        }
 
         // Check if list is empty
         if (isEmpty()) {
@@ -109,27 +142,73 @@ public class CircularDoubleLinkedList<T> implements ADTListInterface<T> {
             length = 0; // Reset length to 0
         }
 
-        return currentNode;
+        return current.nodeValue;
     }
 
     @Override
-    public void findByPhoneNumber(int phoneNumber) {
+    public Employee findByPhoneNumber(int phoneNumber) {
 
+        // Check if the list is empty
+        if (isEmpty()) System.out.println("There are no items in the list");
+
+        // Traverse the node to find a node that matches the phone number
+        Node<Employee> current = head;
+
+        while (current != null){
+            // Check if the phone numbers match
+            if (current.nodeValue.telephoneNumber == phoneNumber){
+                return current.nodeValue;
+            }else{
+                current = current.nextNode;
+            }
+        }
+
+        System.out.println("Cannot find an employee that matches the phone number given");
+        return null;
     }
 
     @Override
-    public void findByLastName(String lastName) {
+    public Employee findByLastName(String lastName) {
         // Traverse the list
         if (isEmpty()) System.out.println("There are no node in the list");
 
+        // Traverse the list to compare last names
+        Node<Employee> current = head;
 
+        while (current != null){
+            // Check if last names match
+            if ( current.nodeValue.lastName.equals(lastName) ){
+                return current.nodeValue;
+            }else{
+                current = current.nextNode;
+            }
+        }
 
-
-
+        System.out.println("Cannot find an employee that matches the last name given");
+        return null;
     }
 
     @Override
-    public List<T> findAllByQualification(String qualification) {
-        return null;
+    public List<Employee> findAllByQualification(String qualification) {
+
+        // Create list to hold all relevant employees
+        List<Employee> employees = new ArrayList<>();
+
+        Node<Employee> current = head;
+
+        while ( current != null ){
+            // Check if the qualifications match
+            if ( current.nodeValue.highestQualification.toLowerCase().equalsIgnoreCase(qualification) ){
+                // If the qualifications match, add the employee to the list
+                employees.add(current.nodeValue);
+            }
+            current = current.nextNode;
+        }
+
+        if (employees.size() == 0){
+            System.out.println("There are no employees that match the given qualification");
+        }
+
+        return employees;
     }
 }

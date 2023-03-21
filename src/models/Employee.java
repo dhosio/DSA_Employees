@@ -9,19 +9,19 @@ import java.util.Objects;
 
 public class Employee implements IEmpView {
 
-    // models.Employee class variables
+    // Employee class variables
     static int numberOfEmployees = 1;
     final char EOLN = '\n';
 
-    // models.Employee Instance Variables
-    int employeeID;
-    String firstName;
-    String lastName;
-    String address;
-    int telephoneNumber;
-    String email;
-    Date dateJoined;
-    String highestQualification;
+    // Employee Instance Variables
+    public int employeeID;
+    public String firstName;
+    public String lastName;
+    public String address;
+    public int telephoneNumber;
+    public String email;
+    public Date dateJoined;
+    public String highestQualification;
 
     public Employee(String firstName, String lastName, String address, int telephoneNumber, String email, Date dateJoined, String highestQualification) {
         this.employeeID = numberOfEmployees++;
@@ -123,7 +123,7 @@ public class Employee implements IEmpView {
     @Override
     public String toString() {
 
-        return "-----------------------------" + EOLN +
+        return "\n-----------------------------" + EOLN +
                 "Employee ID: " + this.employeeID + EOLN +
                 "First Name: " + this.firstName + EOLN +
                 "Last Name: " + this.lastName + EOLN +

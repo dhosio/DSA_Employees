@@ -1,19 +1,19 @@
 package models;
 
 // This is the class that will hold the components of a node in the circular double linked list
-public class Node<T> {
+public class Node<Employee> {
 
     // The node will have data of type employee
-    public T nodeValue;
+    public Employee nodeValue;
 
     // A reference to the next node in the list
-    public Node<T> nextNode;
+    public Node<Employee> nextNode;
 
     // A reference to the previous node in the list
-    public Node<T> prevNode;
+    public Node<Employee> prevNode;
 
     // Constructor
-    public Node(T newValue){
+    public Node(Employee newValue){
         this.nodeValue = newValue;
     }
 
